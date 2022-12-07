@@ -30,7 +30,11 @@ func decode(value reflect.Value) error {
 			}
 			continue
 		}
-		tag := tp.Field(i).Tag.Get("env")
+		tf := tp.Field(i)
+		if !tf.IsExported() {
+			continue
+		}
+		tag := tf.Tag.Get("env")
 		if tag == "-" {
 			continue
 		} else if tag == "" {
