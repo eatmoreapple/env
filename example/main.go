@@ -1,8 +1,3 @@
-# env
-
-## Example
-
-```go
 package main
 
 import (
@@ -34,4 +29,3 @@ func main() {
 	}
 	fmt.Printf("%+v", entity) // {Hello:world Bool:true}
 }
-```
