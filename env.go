@@ -21,12 +21,28 @@ func (e Env) Int() int {
 	return 0
 }
 
+// MustInt returns the value of the environment variable as an int or panics
+func (e Env) MustInt() int {
+	if v, err := strconv.Atoi(e.String()); err == nil {
+		return v
+	}
+	panic("env: invalid int")
+}
+
 // Int8 returns the value of the environment variable as an int8
 func (e Env) Int8() int8 {
 	if v, err := strconv.ParseInt(e.String(), 10, 8); err == nil {
 		return int8(v)
 	}
 	return 0
+}
+
+// MustInt8 returns the value of the environment variable as an int8 or panics
+func (e Env) MustInt8() int8 {
+	if v, err := strconv.ParseInt(e.String(), 10, 8); err == nil {
+		return int8(v)
+	}
+	panic("env: invalid int8")
 }
 
 // Int16 returns the value of the environment variable as an int16
@@ -37,12 +53,28 @@ func (e Env) Int16() int16 {
 	return 0
 }
 
+// MustInt16 returns the value of the environment variable as an int16 or panics
+func (e Env) MustInt16() int16 {
+	if v, err := strconv.ParseInt(e.String(), 10, 16); err == nil {
+		return int16(v)
+	}
+	panic("env: invalid int16")
+}
+
 // Int32 returns the value of the environment variable as an int32
 func (e Env) Int32() int32 {
 	if v, err := strconv.ParseInt(e.String(), 10, 32); err == nil {
 		return int32(v)
 	}
 	return 0
+}
+
+// MustInt32 returns the value of the environment variable as an int32 or panics
+func (e Env) MustInt32() int32 {
+	if v, err := strconv.ParseInt(e.String(), 10, 32); err == nil {
+		return int32(v)
+	}
+	panic("env: invalid int32")
 }
 
 // Int64 returns the value of the environment variable as an int64
@@ -53,12 +85,28 @@ func (e Env) Int64() int64 {
 	return 0
 }
 
+// MustInt64 returns the value of the environment variable as an int64 or panics
+func (e Env) MustInt64() int64 {
+	if v, err := strconv.ParseInt(e.String(), 10, 64); err == nil {
+		return v
+	}
+	panic("env: invalid int64")
+}
+
 // Uint returns the value of the environment variable as an uint
 func (e Env) Uint() uint {
 	if v, err := strconv.ParseUint(e.String(), 10, 64); err == nil {
 		return uint(v)
 	}
 	return 0
+}
+
+// MustUint returns the value of the environment variable as an uint or panics
+func (e Env) MustUint() uint {
+	if v, err := strconv.ParseUint(e.String(), 10, 64); err == nil {
+		return uint(v)
+	}
+	panic("env: invalid uint")
 }
 
 // Uint8 returns the value of the environment variable as an uint8
@@ -69,12 +117,28 @@ func (e Env) Uint8() uint8 {
 	return 0
 }
 
+// MustUint8 returns the value of the environment variable as an uint8 or panics
+func (e Env) MustUint8() uint8 {
+	if v, err := strconv.ParseUint(e.String(), 10, 8); err == nil {
+		return uint8(v)
+	}
+	panic("env: invalid uint8")
+}
+
 // Uint16 returns the value of the environment variable as an uint16
 func (e Env) Uint16() uint16 {
 	if v, err := strconv.ParseUint(e.String(), 10, 16); err == nil {
 		return uint16(v)
 	}
 	return 0
+}
+
+// MustUint16 returns the value of the environment variable as an uint16 or panics
+func (e Env) MustUint16() uint16 {
+	if v, err := strconv.ParseUint(e.String(), 10, 16); err == nil {
+		return uint16(v)
+	}
+	panic("env: invalid uint16")
 }
 
 // Uint32 returns the value of the environment variable as an uint32
@@ -85,12 +149,28 @@ func (e Env) Uint32() uint32 {
 	return 0
 }
 
+// MustUint32 returns the value of the environment variable as an uint32 or panics
+func (e Env) MustUint32() uint32 {
+	if v, err := strconv.ParseUint(e.String(), 10, 32); err == nil {
+		return uint32(v)
+	}
+	panic("env: invalid uint32")
+}
+
 // Uint64 returns the value of the environment variable as an uint64
 func (e Env) Uint64() uint64 {
 	if v, err := strconv.ParseUint(e.String(), 10, 64); err == nil {
 		return v
 	}
 	return 0
+}
+
+// MustUint64 returns the value of the environment variable as an uint64 or panics
+func (e Env) MustUint64() uint64 {
+	if v, err := strconv.ParseUint(e.String(), 10, 64); err == nil {
+		return v
+	}
+	panic("env: invalid uint64")
 }
 
 // Float64 returns the value of the environment variable as a float64
@@ -101,6 +181,14 @@ func (e Env) Float64() float64 {
 	return 0
 }
 
+// MustFloat64 returns the value of the environment variable as a float64 or panics
+func (e Env) MustFloat64() float64 {
+	if v, err := strconv.ParseFloat(e.String(), 64); err == nil {
+		return v
+	}
+	panic("env: invalid float64")
+}
+
 // Float32 returns the value of the environment variable as a float32
 func (e Env) Float32() float32 {
 	if v, err := strconv.ParseFloat(e.String(), 32); err == nil {
@@ -109,12 +197,28 @@ func (e Env) Float32() float32 {
 	return 0
 }
 
+// MustFloat32 returns the value of the environment variable as a float32 or panics
+func (e Env) MustFloat32() float32 {
+	if v, err := strconv.ParseFloat(e.String(), 32); err == nil {
+		return float32(v)
+	}
+	panic("env: invalid float32")
+}
+
 // Bool returns the value of the environment variable as a bool
 func (e Env) Bool() bool {
 	if v, err := strconv.ParseBool(e.String()); err == nil {
 		return v
 	}
 	return false
+}
+
+// MustBool returns the value of the environment variable as a bool or panics
+func (e Env) MustBool() bool {
+	if v, err := strconv.ParseBool(e.String()); err == nil {
+		return v
+	}
+	panic("env: invalid bool")
 }
 
 // IsEmpty returns true if the environment variable is empty
