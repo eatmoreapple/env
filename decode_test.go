@@ -54,3 +54,15 @@ func TestDecode(t *testing.T) {
 	}
 	t.Logf("entity: %+v", entity)
 }
+
+func TestDefault(t *testing.T) {
+	var entity struct {
+		String string `env:"string" default:"hello"`
+	}
+	if err := Decode(&entity); err != nil {
+		t.Fatal(err)
+	}
+	if entity.String != "hello" {
+		t.Errorf("expected %q, got %q", "hello", entity.String)
+	}
+}

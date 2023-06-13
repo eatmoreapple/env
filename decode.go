@@ -40,7 +40,8 @@ func decode(value reflect.Value) error {
 		} else if tag == "" {
 			tag = tp.Field(i).Name
 		}
-		if err := set(field, tag); err != nil {
+		def := Env(tf.Tag.Get("default"))
+		if err := set(field, tag, def); err != nil {
 			return err
 		}
 	}
@@ -48,19 +49,19 @@ func decode(value reflect.Value) error {
 }
 
 // set sets the given value from the environment variable.
-func set(value reflect.Value, name string) error {
+func set(value reflect.Value, name string, def Env) error {
 	env := Name(name)
 	switch value.Kind() {
 	case reflect.String:
-		value.SetString(env.String())
+		value.SetString(env.StringOrElse(def.String()))
 	case reflect.Bool:
-		value.SetBool(env.Bool())
+		value.SetBool(env.BoolOrElse(def.Bool()))
 	case reflect.Int, reflect.Int8, reflect.Int16, reflect.Int32, reflect.Int64:
-		value.SetInt(env.Int64())
+		value.SetInt(env.Int64OrElse(def.Int64()))
 	case reflect.Uint, reflect.Uint8, reflect.Uint16, reflect.Uint32, reflect.Uint64:
-		value.SetUint(env.Uint64())
+		value.SetUint(env.Uint64OrElse(def.Uint64()))
 	case reflect.Float32, reflect.Float64:
-		value.SetFloat(env.Float64())
+		value.SetFloat(env.Float64OrElse(def.Float64()))
 	default:
 		return fmt.Errorf("env: unsupported type %s", value.Kind())
 	}
