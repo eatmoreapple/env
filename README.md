@@ -33,5 +33,15 @@ func main() {
 		log.Fatal(err)
 	}
 	fmt.Printf("%+v", entity) // {Hello:world Bool:true}
+	
+	
+	var defaultEntity struct{
+		Value string `env:"NOT_FOUND" default:"default"`
+    }
+	if err := env.Decode(&defaultEntity); err != nil {
+        log.Fatal(err)
+    }
+	
+	fmt.Printf("%+v", defaultEntity) // {Value:default}
 }
 ```
